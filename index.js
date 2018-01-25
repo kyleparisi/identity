@@ -1,4 +1,4 @@
-if (!process.env.AUTH0_OAUTH_TOKEN_URL) require("./config/env");
+if (!process.env.IDENTITY_OAUTH_TOKEN_URL) require("./config/env");
 const request = require("request");
 
 let oauth_token = {};
@@ -6,13 +6,13 @@ function getToken(cb) {
   request.post(
     {
       method: "POST",
-      url: process.env.AUTH0_OAUTH_TOKEN_URL,
+      url: process.env.IDENTITY_OAUTH_TOKEN_URL,
       headers: { "content-type": "application/json" },
       body: {
-        audience: process.env.AUTH0_AUDIENCE,
-        grant_type: process.env.AUTH0_GRANT_TYPE,
-        client_id: process.env.AUTH0_CLIENT_ID,
-        client_secret: process.env.AUTH0_CLIENT_SECRET
+        audience: process.env.IDENTITY_AUDIENCE,
+        grant_type: process.env.IDENTITY_GRANT_TYPE,
+        client_id: process.env.IDENTITY_CLIENT_ID,
+        client_secret: process.env.IDENTITY_CLIENT_SECRET
       },
       json: true
     },
