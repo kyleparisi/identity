@@ -10,6 +10,7 @@
   "author": "Kyle Parisi (http://blog.kyleparisi.com)",
   "license": "ISC",
   "dependencies": {
+    "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "request": "^2.83.0"
   }

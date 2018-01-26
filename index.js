@@ -1,8 +1,11 @@
 if (!process.env.IDENTITY_OAUTH_TOKEN_URL) require("./config/env");
+const debug = require("debug")(process.env.DEBUG_NAMESPACE + ":identity");
+global.debug = debug;
 const request = require("request");
 
 let oauth_token = {};
 function getToken(cb) {
+  debug("Getting oauth token");
   request.post(
     {
       method: "POST",
@@ -17,7 +20,11 @@ function getToken(cb) {
       json: true
     },
     function(error, response, body) {
-      if (error) throw new Error(error);
+      if (error) {
+        debug("Error: %s", error);
+        return;
+      }
+      debug("Successfully got oauth token");
       oauth_token = body;
       oauth_token.expires = (Math.ceil(new Date().getTime() / 1000)) + body.expires_in;
       if (cb) {
@@ -38,6 +45,6 @@ module.exports = function (cb) {
       }
     })
   }
-
+  debug("Using cached token");
   return oauth_token;
 };
