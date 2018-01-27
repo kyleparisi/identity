@@ -46,5 +46,9 @@ module.exports = function (cb) {
     })
   }
   debug("Using cached token");
+  if (cb) {
+    return cb(oauth_token);
+  }
+
   return oauth_token;
 };
