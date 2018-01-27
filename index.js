@@ -38,12 +38,14 @@ getToken();
 
 module.exports = function (cb) {
   const relativeExpiration = Math.floor(new Date().getTime() / 1000) - oauth_token.expires - 60;
+  debug("Token expires in: %s", relativeExpiration);
   if (relativeExpiration <= 0) {
     getToken(function (token) {
       if (cb) {
         return cb(token)
       }
-    })
+    });
+    return;
   }
   debug("Using cached token");
   if (cb) {
