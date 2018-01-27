@@ -37,7 +37,7 @@ getToken();
 
 
 module.exports = function (cb) {
-  const relativeExpiration = Math.floor(new Date().getTime() / 1000) - oauth_token.expires - 60;
+  const relativeExpiration = oauth_token.expires - Math.floor(new Date().getTime() / 1000);
   debug("Token expires in: %s", relativeExpiration);
   if (relativeExpiration <= 0) {
     getToken(function (token) {
